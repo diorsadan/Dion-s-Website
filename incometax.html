@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <br>
+    <br>
+    <title>Income Tax Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+            background-image:url(https://64.media.tumblr.com/a11a5ab8265563f75cdaa0bb0360e453/tumblr_pg0my2xRxI1vjxiz1o1_540.gifv);
+	        background-repeat: no-repeat;
+	        background-attachment: fixed;
+	        background-size: 100% 100%;
+        }
+        h2 {
+            color: white;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: white;
+        }
+        p {
+            margin-top: 10px;
+            color: white;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            margin-top: 10px;
+        }
+        a:hover {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h2>Income Tax Calculator</h2>
+    
+    <form id="incomeForm">
+        <label for="taxable_income">Enter Taxable Income:</label>
+        <input type="number" id="taxable_income" required>
+        <br>
+        <button type="button" onclick="calculateIncomeTax()">Calculate Income Tax</button>
+    </form>
+
+    <p id="result"></p>
+    <a href="index.html">Back to Homepage</a>
+
+    <script>
+        function calculateIncomeTax() {
+            var taxableIncome = parseFloat(document.getElementById("taxable_income").value);
+            var incomeTax = calculateIncomeTaxAmount(taxableIncome);
+            document.getElementById("result").innerText = "Income Tax for Taxable Income of ₱" + taxableIncome.toFixed(2) + ": ₱" + incomeTax.toFixed(2);
+        }
+
+        function calculateIncomeTaxAmount(income) {
+            if (income <= 250000) {
+                return 0;
+            } else if (income <= 400000) {
+                return 0.20 * (income - 250000);
+            } else if (income <= 800000) {
+                return 30000 + 0.25 * (income - 400000);
+            } else if (income <= 2000000) {
+                return 130000 + 0.30 * (income - 800000);
+            } else if (income <= 8000000) {
+                return 490000 + 0.32 * (income - 2000000);
+            } else {
+                return 2410000 + 0.35 * (income - 8000000);
+            }
+        }
+    </script>
+</body>
+</html>
